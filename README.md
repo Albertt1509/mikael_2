@@ -86,6 +86,6 @@ Untuk menginstal dan menjalankan server, ikuti langkah-langkah di bawah ini:
     Server akan dijalankan dan siap menerima permintaan dari aplikasi.
 
 
-<img width="300" align="center"  src="https://tenor.com/view/spongebob-squarepants-tired-sleepy-exhausted-sleep-deprived-gif-13956099591781651657">
+<img width="300" align="center"  src="https://media1.tenor.com/m/wa4GotoelMkAAAAC/spongebob-squarepants-tired.gif">
 
 
