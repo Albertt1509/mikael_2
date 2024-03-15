@@ -133,7 +133,8 @@ route.post('/edit-blog/:id', upload.fields([{ name: 'gambar', maxCount: 1 }]), a
         console.error('Error updating blog:', error);
         res.status(500).json({ error: 'Terjadi kesalahan saat mengupdate data blog.' });
     }
-}); route.delete('/delete-blog/:id', async (req, res) => {
+});
+route.delete('/delete-blog/:id', async (req, res) => {
     try {
         // Ambil ID blog dari parameter URL
         const blogId = req.params.id;

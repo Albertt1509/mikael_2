@@ -20,4 +20,5 @@ router.delete('/api', blogController)
 router.use('/api', pengumanController)
 router.get('/api', pengumanController)
 router.put('/api', pengumanController)
+router.delete('/api', pengumanController)
 module.exports = router;

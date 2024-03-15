@@ -3,7 +3,7 @@ const Pengumuman = require('../models/pengumuman');
 const route = require('express').Router();
 const multer = require('multer');
 const mongoose = require('mongoose');
-
+const fs = require('fs')
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, './pengumuman');
@@ -122,6 +122,28 @@ route.put('/edit-pengumuman/:id', upload.single('thumbnail'), async (req, res) =
     }
 });
 
+route.delete('/delete-pengumuman/:id', async (req, res) => {
+    try {
+        const pengumumanId = req.params.id
+        if (!mongoose.Types.ObjectId.isValid(pengumumanId)) {
+            return res.status(400).json({ error: "ID tidak ditemukan" })
+        }
+
+        const pengumuman = await Pengumuman.findById(pengumumanId)
+        if (!pengumuman) {
+            return res.status(404).json({ error: 'Pengumuman tidak ditemukan' })
+        }
+        if (pengumuman.thumbnail) {
+            fs.unlinkSync(path.join('./pengumuman', pengumuman.thumbnail))
+        }
+
+        await pengumuman.deleteOne({ _id: pengumumanId })
+        res.status(200).json({ message: 'pengumuman berhasil dihapuss' })
+    } catch (error) {
+        console.eror('Error Deleteing Pengumuman:', error)
+        res.status(500).json({ error: 'terjadi kesalahan saat menghapus data' })
+    }
+})
 
 
 module.exports = route;

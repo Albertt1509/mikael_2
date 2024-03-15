@@ -12,7 +12,14 @@ const PengumumanShow = () => {
     const handleEdit = (id) => {
         navigate(`/dashboard/pengumuman-edit/${id}`); // Menggunakan navigate untuk navigasi ke halaman edit
     };
-
+    const handleDelete = async (id) => {
+        try {
+            await axios.delete(`/api/delete-pengumuman/${id}`)
+            setPengumuman(prevPengumuman => prevPengumuman.filter(pengumuman => pengumuman._id !== id))
+        } catch (error) {
+            console.error('error delete pengumuman', error)
+        }
+    }
     useEffect(() => {
         const fetchPengumuman = async () => {
             try {
@@ -73,7 +80,8 @@ const PengumumanShow = () => {
                                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleEdit([item._id])} >
                                         Edit
                                     </button>
-                                    <button className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" >
+                                    <button className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={() => handleDelete(item._id)}
+                                    >
                                         Delete
                                     </button>
                                 </td>
