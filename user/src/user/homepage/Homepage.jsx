@@ -1,10 +1,30 @@
 import BgCover from '../../assets/slide2.jpg';
 import BgImage from '../../assets/slide1.jpg';
+import { useState, useEffect } from 'react';
 import { PiChurchLight } from 'react-icons/pi';
 import { CiClock2 } from 'react-icons/ci';
 import { MdOutlineCalendarToday } from 'react-icons/md';
-import Card from './Card';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+
 const Homepage = () => {
+    const [pengumuman, setPengumuman] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await axios.get('/api/get-pengumuman');
+                setPengumuman(response.data.slice(0, 3));
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching pengumuman:', error.message);
+                setLoading(false);
+            }
+        };
+        fetchData();
+    }, []);
+
     return (
         <>
             <div className="relative">
@@ -14,8 +34,9 @@ const Homepage = () => {
                     <p className="font-normal text-center hidden lg:block lg:text-left">Selamat Datang di Website Gereja Santo Mikael </p>
                 </div>
             </div>
+
             {/* kontent tengah */}
-            <div className="bg-[#f7eee6] lg:flex lg:justify-center">
+            <div className="bg-gray-200 lg:flex lg:justify-center">
                 <div className="kiri lg:w-[50%] lg:px-6 lg:py-8">
                     <img src={BgImage} className="p-3 w-full rounded-xl" alt="" />
                 </div>
@@ -53,14 +74,25 @@ const Homepage = () => {
                     </div>
                 </div>
             </div>
+
             {/* kontent bawah */}
             <div className="mt-4">
                 <h1 className='flex justify-center text-2xl font-semibold'>Informasi Gereja</h1>
                 <h1 className='flex justify-center'>Santo Mikael Semarang Indah</h1>
-                <div className="p-3 flex justify-center gap-3 shadow-xl bg-[#f7eee6]">
-                    <Card />
-                    <Card />
-                    <Card />
+                <div className="p-3 flex justify-center gap-3 shadow-xl bg-gray-200">
+                    {loading ? (
+                        <div>Loading...</div>
+                    ) : (
+                        pengumuman.map((item, index) => (
+                            <Link key={index} to={`/pengumuman/${item._id}`} className="max-w-sm rounded overflow-hidden shadow-lg">
+                                <img src={`http://localhost:4000/pengumuman/${item.thumbnail}`} className="w-full object-cover h-48" />
+                                <div className="px-6 py-4 bg-white">
+                                    <div className="font-bold text-xl mb-2">{item.judul}</div>
+
+                                </div>
+                            </Link>
+                        ))
+                    )}
                 </div>
             </div>
         </>

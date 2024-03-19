@@ -3,6 +3,7 @@ const router = express.Router();
 const loginController = require('../controllers/loginController')
 const blogController = require('../controllers/blogController')
 const pengumanController = require('../controllers/pengumumanController')
+const profileController = require('../controllers/profileController')
 // login
 // router.post('/api/register', loginController.createRegisterAdmin);
 router.post('/api/login', loginController.postLoginAdmin);
@@ -21,4 +22,9 @@ router.use('/api', pengumanController)
 router.get('/api', pengumanController)
 router.put('/api', pengumanController)
 router.delete('/api', pengumanController)
+
+router.use('/api', profileController)
+router.get('/api', profileController)
+router.put('/api', profileController)
+router.delete('/api', profileController)
 module.exports = router;

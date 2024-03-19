@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Dashboard from '../../admin/dashboard/home';
 import ProfileContent from '../../admin/profile/profile';
 import EditProfile from '../../admin/profile/editProfile';
+import ShowProfile from '../../admin/profile/showProfile';
 import Pengumuman from '../../admin/pengumuman/pengumuman';
 import PengumumanShow from '../../admin/pengumuman/pengumumanShow';
 import PengumumanEdit from '../../admin/pengumuman/editPengumuman';
@@ -22,8 +23,11 @@ const Content = () => {
             {location.pathname === ('/dashboard/profile') && (
                 <ProfileContent />
             )}
-            {location.pathname === '/dashboard/profile-edit' && (
+            {location.pathname === `/dashboard/profile-edit/${id}` && (
                 <EditProfile />
+            )}
+            {location.pathname === '/dashboard/profile-show' && (
+                <ShowProfile />
             )}
             {location.pathname === '/dashboard/pengumuman-add' && (
                 <Pengumuman />

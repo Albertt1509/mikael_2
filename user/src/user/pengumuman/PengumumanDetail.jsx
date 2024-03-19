@@ -22,10 +22,9 @@ const PengumumanDetail = () => {
     return (
         <div className="flex justify-center items-center h-screen bg-gray-100 p-2">
             <div className="bg-white w-full md:max-w-2xl rounded-lg shadow ">
-                {/* Tampilkan detail pengumuman */}
                 {pengumuman && (
                     <div className="p-4">
-                        <img src={`http://localhost:4000/pengumuman/${pengumuman.thumbnail}`} alt="Pengumuman" className="mb-4 mx-auto w-full rounded-lg" />
+                        <img src={`http://localhost:4000/pengumuman/${pengumuman.thumbnail}`} alt="Pengumuman" className="mb-4 mx-auto w-full h-[450px]  rounded-lg" />
                         <div className="border p-5">
                             <h1 className="font-bold text-xl mb-2">{pengumuman.judul}</h1>
                             <p className="text-lg">{pengumuman.keterangan}</p>

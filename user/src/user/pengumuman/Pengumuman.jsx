@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useEffect } from "react";
@@ -7,7 +7,6 @@ import axios from "axios";
 const Pengumuman = () => {
     const [pengumuman, setPengumuman] = useState([])
     const [searchTerm, setSearchTerm] = useState("");
-    const { id } = useParams()
 
     const handleSearchChange = (e) => {
         setSearchTerm(e.target.value);
@@ -60,7 +59,6 @@ const Pengumuman = () => {
                             <img className="w-full h-48 object-cover" src={`http://localhost:4000/pengumuman/${item.thumbnail}`} />
                             <div className="p-6">
                                 <h2 className="text-xl font-semibold mb-2">{item.judul}</h2>
-
                             </div>
                         </div>
                     </Link>

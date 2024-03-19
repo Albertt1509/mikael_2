@@ -44,7 +44,7 @@ const Sidebar = () => {
                                 <Link to='/dashboard/profile-add' className="block p-2 hover:bg-gray-600">Tambah Profile</Link>
                             </li>
                             <li>
-                                <Link to='/dashboard/profile-edit' className="block p-2 hover:bg-gray-600">Edit Profile</Link>
+                                <Link to='/dashboard/profile-show' className="block p-2 hover:bg-gray-600">Edit Profile</Link>
                             </li>
                         </ul>
                     </li>
