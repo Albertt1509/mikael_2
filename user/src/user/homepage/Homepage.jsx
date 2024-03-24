@@ -47,7 +47,7 @@ const Homepage = () => {
                             <div className="justify-center align-center text-center">
                                 <div className="flex items-center justify-center gap-4 mb-2">
                                     <MdOutlineCalendarToday />
-                                    <span className="font-semibold">Hari</span>
+                                    <span className="font-semibold text-xl">Hari</span>
                                 </div>
                                 <span>Sabtu & Minggu</span>
                             </div>

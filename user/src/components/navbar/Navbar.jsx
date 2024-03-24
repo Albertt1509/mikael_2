@@ -95,7 +95,7 @@ function Navbar() {
             {/* Menu desktop */}
             <div className={isOpen ? 'block' : 'hidden sm:hidden'}>
                 <div className="px-2 pt-2 pb-3 text-white">
-                    <Link to={'/'} className="text-dark">Home</Link>
+                    <Link to={'/'} className="text-dark ">Home</Link>
                     <Link to={'/profile'} className="ml-4 text-dark">Profile</Link>
                     <Link to={'/pengumuman'} className="ml-4 text-dark">Pengumuman</Link>
                     <Link to={`/blog`} className="ml-4 text-dark">Blog</Link>

@@ -38,7 +38,7 @@ export default function Modal({ onClose }) {
                             <div key={event._id} className="mb-4">
                                 <p className="text-gray-700 font-semibold text-center mb-3">{event.judul}</p>
                                 <img
-                                    src={`http://localhost:4000/event/${event.gambar}`} alt={event.judul} className="w-full h-auto" />
+                                    src={`http://localhost:4000/event/${event.gambar}`} alt={event.judul} className="w-[500px] h-auto" />
                             </div>
                         ))}
                     </div>
