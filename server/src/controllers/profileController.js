@@ -63,7 +63,7 @@ route.get('/get-profile/:id', async (req, res) => {
     }
 });
 
-route.put('/update-profile/:id', upload.single('profile'), async (req, res) => {
+route.post('/update-profile/:id', upload.single('profile'), async (req, res) => {
     try {
         const profileId = req.params.id;
         if (!mongoose.Types.ObjectId.isValid(profileId)) {
@@ -77,15 +77,21 @@ route.put('/update-profile/:id', upload.single('profile'), async (req, res) => {
             keterangan,
         };
 
+        const profile = await Profile.findById(profileId);
+        if (!profile) {
+            return res.status(404).json({ error: 'Profile tidak ditemukan.' });
+        }
+
+        let oldProfilePhoto = profile.profile;
         if (req.file) {
-            profileData.profile = req.file.filename; // Ubah menjadi req.file.filename
+            // Jika ada foto baru, hapus foto profil lama
+            if (oldProfilePhoto) {
+                fs.unlinkSync(path.join('./profile', oldProfilePhoto));
+            }
+            profileData.profile = req.file.filename;
         }
 
         const updatedProfile = await Profile.findByIdAndUpdate(profileId, profileData, { new: true });
-
-        if (!updatedProfile) {
-            return res.status(404).json({ error: 'Profile tidak ditemukan.' });
-        }
 
         res.status(200).json({ message: 'Profile berhasil diperbarui.', data: updatedProfile });
     } catch (error) {
@@ -93,6 +99,7 @@ route.put('/update-profile/:id', upload.single('profile'), async (req, res) => {
         res.status(500).json({ error: 'Terjadi kesalahan saat memperbarui profile.' });
     }
 });
+
 
 route.delete('/delete-profile/:id', async (req, res) => {
     try {

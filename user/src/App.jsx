@@ -12,6 +12,9 @@ import PengumumanDetail from './user/pengumuman/PengumumanDetail';
 import Login from './components/login/login';
 import Dashboard from './admin/dashboard/home';
 import AdminLay from './components/navbar/AdminLay'
+import EventShow from './admin/dashboard/showEvent'
+import EventAdd from './admin/dashboard/addEvent'
+import EventEdit from './admin/dashboard/editEvent'
 import AdminProfile from './admin/profile/profile'
 import AdminProfileShow from './admin/profile/showProfile'
 import AdminProfileEdit from './admin/profile/editProfile'
@@ -44,6 +47,9 @@ function App() {
         <Route>
           <Route path='/dashboard' element={<AdminLay />}>
             <Route index element={<Dashboard />} />
+            <Route path='/dashboard/event-add' element={<EventAdd />} />
+            <Route path='/dashboard/event-show' element={<EventShow />} />
+            <Route path='/dashboard/event-edit/:id' element={<EventEdit />} />
             <Route path='/dashboard/profile-add' element={<AdminProfile />} />
             <Route path='/dashboard/profile-edit/:id' element={<AdminProfileEdit />} />
             <Route path='/dashboard/profile-show' element={<AdminProfileShow />} />

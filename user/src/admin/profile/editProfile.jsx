@@ -30,18 +30,22 @@ const EditProfile = () => {
     const handleChangeNama = (e) => {
         setNama(e.target.value);
     };
+
     const handleChangeJabatan = (e) => {
         setJabatan(e.target.value);
     };
+
     const handleChangeKeterangan = (e) => {
         setKeterangan(e.target.value);
     };
+
     const handleChangeProfile = (e) => {
         setGambar(e.target.files[0]);
     };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!nama || !jabatan || !keterangan || !gambar) {
+        if (!nama || !jabatan || !keterangan) {
             setShowErrorNotification(true);
             setTimeout(() => {
                 setShowErrorNotification(false);
@@ -53,8 +57,10 @@ const EditProfile = () => {
             formData.append('nama', nama);
             formData.append('jabatan', jabatan);
             formData.append('keterangan', keterangan);
-            formData.append('gambar', gambar);
-            const response = await axios.put(`/api/update-profile/${id}`, formData);
+            if (gambar) {
+                formData.append('profile', gambar);
+            }
+            const response = await axios.post(`/api/update-profile/${id}`, formData);
             console.log('Response:', response.data);
             setShowSuccessNotification(true);
             setTimeout(() => {
@@ -70,7 +76,7 @@ const EditProfile = () => {
             <h1 className="text-2xl font-semibold ml-8 mt-5">Profile Edit</h1>
             <div className="p-8 flex items-center justify-center">
                 <div className="bg-white rounded-lg shadow-lg p-8 w-full ">
-                    <form onSubmit={handleSubmit} encType="multipart/form-data">
+                    <form onSubmit={handleSubmit}>
                         <div className="flex flex-wrap mb-4">
                             <div className="w-full md:w-1/2 md:pr-2">
                                 <label htmlFor="nama" className="block text-gray-700 font-bold mb-2">Nama:</label>
@@ -82,13 +88,15 @@ const EditProfile = () => {
                             </div>
                         </div>
                         <div className="flex flex-wrap mb-4">
-                            <div className="w-full md:w-1/2 md:pr-2">
+                            <div className="w-full">
                                 <label htmlFor="keterangan" className="block text-gray-700 font-bold mb-2">Keterangan:</label>
                                 <textarea id="keterangan" name="keterangan" placeholder="Masukkan keterangan" value={keterangan} className="w-full p-2 border rounded" onChange={handleChangeKeterangan} required />
                             </div>
-                            <div className="w-full md:w-1/2 md:pl-2">
+                        </div>
+                        <div className="flex flex-wrap mb-4">
+                            <div className="w-full">
                                 <label htmlFor="profile" className="block text-gray-700 font-bold mb-2">Profile:</label>
-                                <input type="file" id="profile" name="profile" className="w-full p-2 border rounded" onChange={handleChangeProfile} required />
+                                <input type="file" id="profile" name="profile" className="w-full p-2 border rounded" onChange={handleChangeProfile} />
                             </div>
                         </div>
                         <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">Submit</button>
@@ -97,12 +105,12 @@ const EditProfile = () => {
             </div>
             {showSuccessNotification && (
                 <div className="bg-green-200 text-green-700 px-4 py-2 mt-4 mx-8 rounded">
-                    Profile selesai di update!
+                    Profile berhasil diupdate!
                 </div>
             )}
             {showErrorNotification && (
                 <div className="bg-red-200 text-red-700 px-4 py-2 mt-4 mx-8 rounded">
-                    isi semua bagian
+                    Mohon isi semua kolom.
                 </div>
             )}
         </div>

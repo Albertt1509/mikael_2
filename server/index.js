@@ -21,6 +21,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use("/blog", express.static(path.join(__dirname, "blog")))
+app.use("/event", express.static(path.join(__dirname, "event")))
 app.use("/profile", express.static(path.join(__dirname, "profile")))
 app.use("/pengumuman", express.static(path.join(__dirname, "pengumuman")))
 app.use("/", routes);

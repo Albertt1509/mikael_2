@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 
 const EditPengumuman = () => {
     const [pengumuman, setPengumuman] = useState(null);
@@ -42,6 +43,14 @@ const EditPengumuman = () => {
         newPoin[index] = value;
         setPoin(newPoin);
     };
+    const handleDeletePoin = (index) => {
+        const newPoin = [...poin];
+        newPoin.splice(index, 1);
+        setPoin(newPoin);
+    };
+    const handleAddPoin = () => {
+        setPoin([...poin, '']);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -54,7 +63,7 @@ const EditPengumuman = () => {
             if (thumbnail) {
                 formData.append('thumbnail', thumbnail);
             }
-            await axios.put(`/api/edit-pengumuman/${id}`, formData);
+            await axios.post(`/api/edit-pengumuman/${id}`, formData);
             setSuccessMessage('Pengumuman berhasil diperbarui.');
         } catch (error) {
             setErrorMessage('Terjadi kesalahan saat memperbarui pengumuman.');
@@ -90,13 +99,21 @@ const EditPengumuman = () => {
                         </div>
                         <div className="mb-4">
                             {poin.map((p, index) => (
-                                <div className="mb-4" key={index}>
-                                    <label htmlFor={`poin${index + 1}`} className="block text-gray-700 font-bold mb-2">{`Poin ${index + 1}:`}</label>
-                                    <input type='text' id={`poin${index + 1}`} name={`poin${index + 1}`} value={p || ''} onChange={(e) => handlePoinChange(index, e.target.value)} className="w-full p-2 border rounded" required />
+                                <div className="mb-4 flex items-center" key={index}>
+                                    <label htmlFor={`poin${index + 1}`} className="block text-gray-700 font-bold mr-2">{`Poin ${index + 1}:`}</label>
+                                    <input type='text' id={`poin${index + 1}`} name={`poin${index + 1}`} value={p || ''} onChange={(e) => handlePoinChange(index, e.target.value)} className="w-auto p-2 border rounded" required />
+                                    <button type="button" className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2" onClick={() => handleDeletePoin(index)}>
+                                        <RiDeleteBin6Line /> {/* Icon component */}
+                                    </button>
                                 </div>
                             ))}
                         </div>
-                        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded mt-4">Simpan</button>
+                        <div className="flex gap-5 pt-5">
+                            <button type="button" className="bg-blue-500 text-white py-2 px-4 rounded4" onClick={handleAddPoin}>
+                                Tambah Poin
+                            </button>
+                            <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Simpan</button>
+                        </div>
                     </form>
                     {errorMessage && <div className="text-red-500 mt-2">{errorMessage}</div>}
                     {successMessage && <div className="text-green-500 mt-2">{successMessage}</div>}

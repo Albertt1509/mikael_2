@@ -109,7 +109,7 @@ route.post('/edit-blog/:id', upload.fields([{ name: 'gambar', maxCount: 1 }]), a
         if (req.files['gambar'] && req.files['gambar'][0]) {
             // Hapus gambar lama dari folder
             if (blog.gambar) {
-                z.unlinkSync(path.join('./blog', blog.gambar));
+                fs.unlinkSync(path.join('./blog', blog.gambar));
             }
             // Update nama gambar baru
             blog.gambar = req.files['gambar'][0].filename;

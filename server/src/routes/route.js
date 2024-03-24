@@ -4,6 +4,7 @@ const loginController = require('../controllers/loginController')
 const blogController = require('../controllers/blogController')
 const pengumanController = require('../controllers/pengumumanController')
 const profileController = require('../controllers/profileController')
+const eventController = require('../controllers/eventController')
 // login
 // router.post('/api/register', loginController.createRegisterAdmin);
 router.post('/api/login', loginController.postLoginAdmin);
@@ -27,4 +28,9 @@ router.use('/api', profileController)
 router.get('/api', profileController)
 router.put('/api', profileController)
 router.delete('/api', profileController)
+
+router.use('/api', eventController)
+router.get('/api', eventController)
+router.put('/api', eventController)
+router.delete('/api', eventController)
 module.exports = router;

@@ -63,7 +63,7 @@ const ProfileContent = () => {
     };
 
     return (
-        <div className=''>
+        <div className='bg-gray-200 min-h-screen overflow-auto'>
             <h1 className="text-2xl font-semibold ml-8 mt-5">Tambahkan Blog</h1>
             <div className=" p-8 flex items-center justify-center">
                 <div className="bg-white rounded-lg shadow-lg p-8 w-full ">

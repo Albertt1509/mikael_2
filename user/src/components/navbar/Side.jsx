@@ -4,10 +4,16 @@ import { BsFillPersonFill, BsFillBellFill, BsFillChatFill, BsFillGridFill, BsBox
 import axios from 'axios';
 
 const Sidebar = () => {
+    const [isEventDropdownOpen, setIsEventeDropdownOpen] = useState(false);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isAnnouncementDropdownOpen, setIsAnnouncementDropdownOpen] = useState(false);
     const [isBlogDropdownOpen, setIsBlogDropdownOpen] = useState(false);
     const [isHomePage, setHomePage] = useState(null)
+
+    const toggleEventDropdown = () => {
+        setIsEventeDropdownOpen(!isEventDropdownOpen)
+    }
+
     const toggleProfileDropdown = () => {
         setIsProfileDropdownOpen(!isProfileDropdownOpen);
     };
@@ -35,7 +41,15 @@ const Sidebar = () => {
             <nav className="text-sm flex-1">
                 <ul className="space-y-2">
                     <li>
-                        <Link to='/dashboard' className="block p-2 hover:bg-gray-700"><BsFillGridFill className="inline-block mr-2" />Dashboard</Link>
+                        <a href="#" className="block p-2 hover:bg-gray-700" onClick={toggleEventDropdown}><BsFillGridFill className="inline-block mr-2" />Dashboard</a>
+                        <ul className={`${isEventDropdownOpen ? 'block' : 'hidden'} bg-gray-700 py-2 pl-4`}>
+                            <li>
+                                <Link to='/dashboard/event-add' className="block p-2 hover:bg-gray-600">Tambah Event</Link>
+                            </li>
+                            <li>
+                                <Link to='/dashboard/event-show' className="block p-2 hover:bg-gray-600">Edit Event</Link>
+                            </li>
+                        </ul>
                     </li>
                     <li>
                         <a href="#" className="block p-2 hover:bg-gray-700" onClick={toggleProfileDropdown}><BsFillPersonFill className="inline-block mr-2" />Profile</a>

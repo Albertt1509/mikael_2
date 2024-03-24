@@ -1,6 +1,8 @@
-import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Dashboard from '../../admin/dashboard/home';
+import DashboardAdd from '../../admin/dashboard/addEvent';
+import DashboardShow from '../../admin/dashboard/showEvent';
+import DashboardEdit from '../../admin/dashboard/editEvent';
 import ProfileContent from '../../admin/profile/profile';
 import EditProfile from '../../admin/profile/editProfile';
 import ShowProfile from '../../admin/profile/showProfile';
@@ -19,6 +21,15 @@ const Content = () => {
         <div className="min-h-screen p-8">
             {location.pathname === '/dashboard' && (
                 <Dashboard />
+            )}
+            {location.pathname === '/dashboard/event-show' && (
+                <DashboardShow />
+            )}
+            {location.pathname === '/dashboard/event-add' && (
+                <DashboardAdd />
+            )}
+            {location.pathname === `/dashboard/event-edit/${id}` && (
+                <DashboardEdit />
             )}
             {location.pathname === ('/dashboard/profile') && (
                 <ProfileContent />

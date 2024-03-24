@@ -75,13 +75,9 @@ route.get('/get-pengumuman/:id', async (req, res) => {
     }
 })
 
-route.put('/edit-pengumuman/:id', upload.single('thumbnail'), async (req, res) => {
+route.post('/edit-pengumuman/:id', upload.single('thumbnail'), async (req, res) => {
     try {
-        const pengumumanId = req.params.id;
-        if (!mongoose.Types.ObjectId.isValid(pengumumanId)) {
-            return res.status(400).json({ error: 'ID Pengumuman tidak valid.' });
-        }
-
+        const { id } = req.params;
         const { judul, tanggal, keterangan } = req.body;
         const poin = [];
 
@@ -91,36 +87,34 @@ route.put('/edit-pengumuman/:id', upload.single('thumbnail'), async (req, res) =
             }
         }
 
-        let updateData = {
-            judul,
-            tanggal,
-            keterangan,
-            poin
-        };
+        const pengumuman = await Pengumuman.findById(id);
+        if (!pengumuman) {
+            return res.status(404).json({ error: 'Pengumuman not found' });
+        }
 
+        let oldThumbnail = pengumuman.thumbnail;
         if (req.file) {
-            // Hapus thumbnail lama
-            const pengumuman = await Pengumuman.findById(pengumumanId);
-            if (pengumuman.thumbnail) {
-                fs.unlinkSync(path.join(__dirname, '..', 'pengumuman', pengumuman.thumbnail));
+            // Jika ada foto baru, hapus foto lama
+            if (oldThumbnail) {
+                fs.unlinkSync(path.join('./pengumuman', oldThumbnail));
             }
-
-            // Simpan thumbnail baru
-            updateData.thumbnail = req.file.filename;
+            pengumuman.thumbnail = req.file.filename;
         }
 
-        const updatedPengumuman = await Pengumuman.findByIdAndUpdate(pengumumanId, updateData, { new: true });
+        pengumuman.judul = judul;
+        pengumuman.tanggal = tanggal;
+        pengumuman.keterangan = keterangan;
+        pengumuman.poin = poin;
 
-        if (!updatedPengumuman) {
-            return res.status(404).json({ error: 'Pengumuman tidak ditemukan.' });
-        }
-
-        res.status(200).json({ pengumuman: updatedPengumuman, message: 'Pengumuman berhasil diperbarui.' });
+        const updatedPengumuman = await pengumuman.save();
+        res.status(200).json({ pengumuman: updatedPengumuman, message: 'Pengumuman updated successfully' });
     } catch (error) {
-        console.error('Error updating pengumuman by ID:', error);
-        res.status(500).json({ error: 'Terjadi kesalahan saat memperbarui pengumuman.' });
+        console.error('Error updating pengumuman:', error);
+        res.status(500).json({ error: 'Failed to update pengumuman' });
     }
 });
+
+
 
 route.delete('/delete-pengumuman/:id', async (req, res) => {
     try {
