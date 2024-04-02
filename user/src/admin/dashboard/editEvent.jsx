@@ -5,6 +5,8 @@ import { useParams } from "react-router-dom";
 const EditEvent = () => {
     const [event, setEvent] = useState(null);
     const [judul, setJudul] = useState('');
+    const [contact, setContact] = useState('');
+    const [descript, setDescript] = useState('');
     const [gambar, setGambar] = useState(null);
     const { id } = useParams();
     const [showSuccessNotification, setShowSuccessNotification] = useState(false);
@@ -16,6 +18,8 @@ const EditEvent = () => {
                 const data = response.data;
                 setEvent(data);
                 setJudul(data.judul);
+                setContact(data.contact);
+                setDescript(data.descript);
                 setGambar(data.gambar);
             })
             .catch(error => {
@@ -27,6 +31,14 @@ const EditEvent = () => {
         setJudul(e.target.value);
     };
 
+    const handleContactChange = (e) => {
+        setContact(e.target.value);
+    };
+
+    const handleDescriptChange = (e) => {
+        setDescript(e.target.value);
+    };
+
     const handleImageChange = (e) => {
         setGambar(e.target.files[0]);
     };
@@ -36,6 +48,8 @@ const EditEvent = () => {
         try {
             const formData = new FormData();
             formData.append('judul', judul);
+            formData.append('contact', contact);
+            formData.append('descript', descript);
             if (gambar) {
                 formData.append('gambar', gambar);
             }
@@ -77,6 +91,16 @@ const EditEvent = () => {
                                 <div className="w-full md:w-1/2 md:pl-2">
                                     <label htmlFor="gambar" className="block text-gray-700 font-bold mb-2">Gambar Event:</label>
                                     <input type="file" id="gambar" className="w-full p-2 border rounded" onChange={handleImageChange} />
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap mb-4 mt-7">
+                                <div className="w-full md:w-1/2 md:pr-2">
+                                    <label htmlFor="descript" className="block text-gray-700 font-bold mb-2">Deskripsi Event:</label>
+                                    <textarea id="descript" className="w-full p-2 border rounded" value={descript} onChange={handleDescriptChange}></textarea>
+                                </div>
+                                <div className="w-full md:w-1/2 md:pl-2">
+                                    <label htmlFor="contact" className="block text-gray-700 font-bold mb-2">Informasi Kontak:</label>
+                                    <input type="text" id="contact" className="w-full p-2 border rounded" value={contact} onChange={handleContactChange} />
                                 </div>
                             </div>
                             <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Simpan</button>

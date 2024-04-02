@@ -4,11 +4,15 @@ const { Schema } = mongoose
 const eventSchema = new Schema({
     judul: {
         type: String,
-
     },
     gambar: {
         type: String,
-
+    },
+    descript: {
+        type: String,
+    },
+    contact: {
+        type: String,
     }
 })
 

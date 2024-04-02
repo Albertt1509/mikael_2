@@ -1,5 +1,8 @@
 import { useLocation } from 'react-router-dom';
 import Dashboard from '../../admin/dashboard/home';
+import JadwalAdd from '../../admin/jadwal/addJawal'
+import JadwalEdit from '../../admin/jadwal/editJadwal'
+import JadwalShow from '../../admin/jadwal/showJadwal'
 import DashboardAdd from '../../admin/dashboard/addEvent';
 import DashboardShow from '../../admin/dashboard/showEvent';
 import DashboardEdit from '../../admin/dashboard/editEvent';
@@ -21,6 +24,15 @@ const Content = () => {
         <div className="min-h-screen p-8">
             {location.pathname === '/dashboard' && (
                 <Dashboard />
+            )}
+            {location.pathname === '/dashboard/ jadwal-show' && (
+                <JadwalAdd />
+            )}
+            {location.pathname === '/dashboard/ jadwal-edit' && (
+                <JadwalShow />
+            )}
+            {location.pathname === `/dashboard/jadwal-edit/${id}` && (
+                <JadwalEdit />
             )}
             {location.pathname === '/dashboard/event-show' && (
                 <DashboardShow />

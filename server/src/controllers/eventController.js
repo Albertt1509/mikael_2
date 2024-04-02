@@ -20,10 +20,12 @@ const upload = multer({ storage: storage });
 
 route.post('/add-event', upload.single('gambar'), async (req, res) => {
     try {
-        const { judul } = req.body;
+        const { judul, descript, contact } = req.body;
         if (req.file) {
             const newEvent = new Event({
                 judul,
+                descript,
+                contact,
                 gambar: req.file.filename,
             });
             const saveEvent = await newEvent.save();
@@ -70,8 +72,8 @@ route.post('/update-event/:id', upload.single('gambar'), async (req, res) => {
             return res.status(400).json({ error: 'ID event tidak valid.' });
         }
 
-        const { judul } = req.body;
-        const eventData = { judul };
+        const { judul, contact, descript } = req.body;
+        const eventData = { judul, contact, descript };
 
         const event = await Event.findById(eventId);
         if (!event) {

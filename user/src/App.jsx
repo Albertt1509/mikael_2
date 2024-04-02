@@ -12,6 +12,9 @@ import PengumumanDetail from './user/pengumuman/PengumumanDetail';
 import Login from './components/login/login';
 import Dashboard from './admin/dashboard/home';
 import AdminLay from './components/navbar/AdminLay'
+import JadwalAdd from './admin/jadwal/addJawal'
+import JadwalShow from './admin/jadwal/showJadwal'
+import JadwalEdit from './admin/jadwal/editJadwal'
 import EventShow from './admin/dashboard/showEvent'
 import EventAdd from './admin/dashboard/addEvent'
 import EventEdit from './admin/dashboard/editEvent'
@@ -47,6 +50,9 @@ function App() {
         <Route>
           <Route path='/dashboard' element={<AdminLay />}>
             <Route index element={<Dashboard />} />
+            <Route path='/dashboard/jadwal-add' element={<JadwalAdd />} />
+            <Route path='/dashboard/jadwal-show' element={<JadwalShow />} />
+            <Route path='/dashboard/jadwal-edit/:id' element={<JadwalEdit />} />
             <Route path='/dashboard/event-add' element={<EventAdd />} />
             <Route path='/dashboard/event-show' element={<EventShow />} />
             <Route path='/dashboard/event-edit/:id' element={<EventEdit />} />

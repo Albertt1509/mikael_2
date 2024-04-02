@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
-import { BsFillPersonFill, BsFillBellFill, BsFillChatFill, BsFillGridFill, BsBoxArrowRight } from 'react-icons/bs';
+import { BsFillPersonFill, BsFillBellFill, BsFillChatFill, BsFillGridFill, BsBoxArrowRight, BsFillCalendarEventFill } from 'react-icons/bs';
 import axios from 'axios';
 
 const Sidebar = () => {
@@ -8,6 +8,7 @@ const Sidebar = () => {
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isAnnouncementDropdownOpen, setIsAnnouncementDropdownOpen] = useState(false);
     const [isBlogDropdownOpen, setIsBlogDropdownOpen] = useState(false);
+    const [isJadwalDropdownOpen, setIsJadwalDropdownOpen] = useState(false);
     const [isHomePage, setHomePage] = useState(null)
 
     const toggleEventDropdown = () => {
@@ -25,6 +26,9 @@ const Sidebar = () => {
     const toggleBlogDropdown = () => {
         setIsBlogDropdownOpen(!isBlogDropdownOpen);
     };
+    const toggleJadwalDropdown = () => {
+        setIsJadwalDropdownOpen(!isJadwalDropdownOpen);
+    };
 
     async function logout() {
         await axios.post('/api/logout')
@@ -41,7 +45,18 @@ const Sidebar = () => {
             <nav className="text-sm flex-1">
                 <ul className="space-y-2">
                     <li>
-                        <a href="#" className="block p-2 hover:bg-gray-700" onClick={toggleEventDropdown}><BsFillGridFill className="inline-block mr-2" />Dashboard</a>
+                        <a href="#" className="block p-2 hover:bg-gray-700" onClick={toggleJadwalDropdown}><BsFillCalendarEventFill className="inline-block mr-2" />Jadwal</a>
+                        <ul className={`${isJadwalDropdownOpen ? 'block' : 'hidden'} bg-gray-700 py-2 pl-4`}>
+                            <li>
+                                <Link to='/dashboard/jadwal-add' className="block p-2 hover:bg-gray-600">Tambah Jadwal</Link>
+                            </li>
+                            <li>
+                                <Link to='/dashboard/jadwal-show' className="block p-2 hover:bg-gray-600">Edit Jadwal</Link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" className="block p-2 hover:bg-gray-700" onClick={toggleEventDropdown}><BsFillGridFill className="inline-block mr-2" />Event</a>
                         <ul className={`${isEventDropdownOpen ? 'block' : 'hidden'} bg-gray-700 py-2 pl-4`}>
                             <li>
                                 <Link to='/dashboard/event-add' className="block p-2 hover:bg-gray-600">Tambah Event</Link>

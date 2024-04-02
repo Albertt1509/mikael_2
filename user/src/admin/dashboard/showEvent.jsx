@@ -41,6 +41,8 @@ export default function ShowEvent() {
                 <thead>
                     <tr className="bg-black text-white border-b">
                         <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Judul</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Deskripsi</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Kontak Inforamsi</th>
                         <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Gambar</th>
                         <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Aksi</th>
                     </tr>
@@ -49,6 +51,8 @@ export default function ShowEvent() {
                     {events.map(event => (
                         <tr key={event._id}>
                             <td className="px-6 py-4 whitespace-nowrap">{event.judul}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">{event.descript}</td>
+                            <td className="px-6 py-4 whitespace-nowrap">{event.contact}</td>
                             <td className="px-6 py-4 whitespace-nowrap">
                                 <img src={`http://localhost:4000/event/${event.gambar}`} alt={event.judul} className="h-20 w-100 " />
                             </td>

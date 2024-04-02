@@ -37,8 +37,9 @@ export default function Modal({ onClose }) {
                         {events.map((event) => (
                             <div key={event._id} className="mb-4">
                                 <p className="text-gray-700 font-semibold text-center mb-3">{event.judul}</p>
-                                <img
-                                    src={`http://localhost:4000/event/${event.gambar}`} alt={event.judul} className="w-[500px] h-auto" />
+                                <img src={`http://localhost:4000/event/${event.gambar}`} alt={event.judul} className="w-[500px] h-auto" />
+                                <p className="text-gray-700  text-left mt-3">{event.descript}</p>
+                                <p className="text-gray-700  text-right mb-3">Hubungi:{event.contact}</p>
                             </div>
                         ))}
                     </div>

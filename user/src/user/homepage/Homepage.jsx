@@ -9,16 +9,21 @@ import { Link } from 'react-router-dom';
 
 const Homepage = () => {
     const [pengumuman, setPengumuman] = useState([]);
+    const [jadwalMisa, setJadwalMisa] = useState([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('/api/get-pengumuman');
-                setPengumuman(response.data.slice(0, 3));
+                const pengumumanResponse = await axios.get('/api/get-pengumuman');
+                setPengumuman(pengumumanResponse.data.slice(0, 3));
+
+                const jadwalMisaResponse = await axios.get('/api/get-jadwal');
+                setJadwalMisa(jadwalMisaResponse.data);
+
                 setLoading(false);
             } catch (error) {
-                console.error('Error fetching pengumuman:', error.message);
+                console.error('Error fetching data:', error.message);
                 setLoading(false);
             }
         };
@@ -47,9 +52,12 @@ const Homepage = () => {
                             <div className="justify-center align-center text-center">
                                 <div className="flex items-center justify-center gap-4 mb-2">
                                     <MdOutlineCalendarToday />
-                                    <span className="font-semibold text-xl">Hari</span>
+                                    <span className="font-semibold text-xl">Misa</span>
                                 </div>
-                                <span>Sabtu & Minggu</span>
+                                {/* Tampilkan nama misa dari jadwal misa */}
+                                {jadwalMisa.map((jadwal, index) => (
+                                    <span key={index}>{jadwal.misa}</span>
+                                ))}
                             </div>
                             <div className="mt-4">
                                 <div className="justify-center align-center text-center">
@@ -57,8 +65,10 @@ const Homepage = () => {
                                         <CiClock2 />
                                         <span className="font-semibold">Jam</span>
                                     </div>
-                                    <span>Minggu : 06.00 Wib, 08.45 Wib & 17.00 Wib</span><br />
-                                    <span>Sabtu: 17.00 Wib</span>
+                                    {/* Tampilkan hari dan jam dari jadwal misa */}
+                                    {jadwalMisa.map((jadwal, index) => (
+                                        <span key={index}>{jadwal.hari} {jadwal.jam} WIB</span>
+                                    ))}
                                 </div>
                             </div>
                             <div className="mt-4">
@@ -88,7 +98,6 @@ const Homepage = () => {
                                 <img src={`http://localhost:4000/pengumuman/${item.thumbnail}`} className="w-full object-cover h-48" />
                                 <div className="px-6 py-4 bg-white">
                                     <div className="font-bold text-xl mb-2">{item.judul}</div>
-
                                 </div>
                             </Link>
                         ))

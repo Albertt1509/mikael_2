@@ -4,6 +4,8 @@ import axios from "axios";
 const AddEvent = () => {
     const [judul, setJudul] = useState('');
     const [gambar, setGambar] = useState('');
+    const [contact, setContact] = useState('');
+    const [descript, setDescript] = useState('');
     const [showSuccessNotification, setShowSuccessNotification] = useState(false);
     const [showErrorNotification, setShowErrorNotification] = useState(false);
 
@@ -20,6 +22,8 @@ const AddEvent = () => {
             const formData = new FormData();
             formData.append('judul', judul);
             formData.append('gambar', gambar);
+            formData.append('contact', contact);
+            formData.append('descript', descript);
 
             const response = await axios.post('/api/add-event', formData, {
                 headers: {
@@ -57,6 +61,16 @@ const AddEvent = () => {
                                 <div className="w-full md:w-1/2 md:pl-2">
                                     <label htmlFor="gambar" className="block text-gray-700 font-bold mb-2">Gambar Event:</label>
                                     <input type="file" id="gambar" name="gambar" className="w-full p-2 border rounded" onChange={(e) => setGambar(e.target.files[0])} />
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap mb-4 mt-7">
+                                <div className="w-full md:w-1/2 md:pr-2">
+                                    <label htmlFor="judul" className="block text-gray-700 font-bold mb-2">Deskripsi Event:</label>
+                                    <textarea type="text" id="judul" className="w-full p-2 border rounded" placeholder="Masukkan No Handphone" value={descript} onChange={(e) => setDescript(e.target.value)} />
+                                </div>
+                                <div className="w-full md:w-1/2 md:pr-2">
+                                    <label htmlFor="judul" className="block text-gray-700 font-bold mb-2">Informasi Kontak:</label>
+                                    <input type="text" id="judul" className="w-full p-2 border rounded" placeholder="Masukkan Deskripsi Event" value={contact} onChange={(e) => setContact(e.target.value)} />
                                 </div>
                             </div>
                             <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded">Simpan</button>
