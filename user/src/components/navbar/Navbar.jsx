@@ -87,7 +87,11 @@ function Navbar() {
                                 <Link to={'/pengumuman'} className="ml-4 text-dark">Pengumuman</Link>
                                 <h1 className="">|</h1>
                             </div>
-                            <Link to={`/blog`} className="ml-4 text-dark">Blog</Link>
+                            <div className="flex gap-3">
+                                <Link to={`/blog`} className="ml-4 text-dark">Blog</Link>
+                                <h1 className="">|</h1>
+                            </div>
+                            <Link to={`/media`} className="ml-4 text-dark">Media</Link>
                         </div>
                     </div>
                 </div>

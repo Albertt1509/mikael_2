@@ -109,12 +109,10 @@ route.delete('/delete-event/:id', async (req, res) => {
             return res.status(404).json({ error: 'Event tidak ditemukan.' });
         }
 
-        // Hapus foto event dari direktori
         if (event.gambar) {
             fs.unlinkSync(path.join('./event', event.gambar));
         }
 
-        // Hapus event dari database
         await Event.findByIdAndDelete(eventId);
 
         res.status(200).json({ message: 'Event berhasil dihapus.' });

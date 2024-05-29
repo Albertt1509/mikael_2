@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import { BsFillPersonFill, BsFillBellFill, BsFillChatFill, BsFillGridFill, BsBoxArrowRight, BsFillCalendarEventFill } from 'react-icons/bs';
 import axios from 'axios';
-
+import { AiFillPicture } from 'react-icons/ai'
 const Sidebar = () => {
     const [isEventDropdownOpen, setIsEventeDropdownOpen] = useState(false);
     const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
     const [isAnnouncementDropdownOpen, setIsAnnouncementDropdownOpen] = useState(false);
     const [isBlogDropdownOpen, setIsBlogDropdownOpen] = useState(false);
     const [isJadwalDropdownOpen, setIsJadwalDropdownOpen] = useState(false);
+    const [isGaleryDropdownOpen, setGaleryDropdownOpen] = useState(false);
     const [isHomePage, setHomePage] = useState(null)
 
     const toggleEventDropdown = () => {
@@ -28,6 +29,9 @@ const Sidebar = () => {
     };
     const toggleJadwalDropdown = () => {
         setIsJadwalDropdownOpen(!isJadwalDropdownOpen);
+    };
+    const toggleGaleryDropdown = () => {
+        setGaleryDropdownOpen(!isGaleryDropdownOpen);
     };
 
     async function logout() {
@@ -96,6 +100,17 @@ const Sidebar = () => {
                             </li>
                             <li>
                                 <Link to='/dashboard/blog-show' className="block p-2 hover:bg-gray-600">Edit Blog</Link>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#" className="block p-2 hover:bg-gray-700" onClick={toggleGaleryDropdown}><AiFillPicture className="inline-block mr-2" />Galery</a>
+                        <ul className={`${isGaleryDropdownOpen ? 'block' : 'hidden'} bg-gray-700 py-2 pl-4`}>
+                            <li>
+                                <Link to='/dashboard/media-add' className="block p-2 hover:bg-gray-600">Tambah Galery</Link>
+                            </li>
+                            <li>
+                                <Link to='/dashboard/media-show' className="block p-2 hover:bg-gray-600">Edit Galery</Link>
                             </li>
                         </ul>
                     </li>

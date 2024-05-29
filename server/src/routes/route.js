@@ -6,6 +6,7 @@ const pengumanController = require('../controllers/pengumumanController')
 const profileController = require('../controllers/profileController')
 const eventController = require('../controllers/eventController')
 const jadwalController = require('../controllers/jadwalController')
+const mediaControler = require('../controllers/mediaController')
 // login
 // router.post('/api/register', loginController.createRegisterAdmin);
 router.post('/api/login', loginController.postLoginAdmin);
@@ -39,4 +40,9 @@ router.use('/api', jadwalController)
 router.get('/api', eventController)
 router.put('/api', jadwalController)
 router.delete('/api', jadwalController)
+
+router.use('/api', mediaControler)
+router.get('/api', mediaControler)
+// router.put('/api', mediaConttoler)
+// router.delete('/api', mediaConttoler)
 module.exports = router;

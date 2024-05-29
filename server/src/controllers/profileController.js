@@ -20,10 +20,10 @@ const upload = multer({ storage: storage });
 
 route.post('/add-profile', upload.fields([{ name: 'profile', maxCount: 1 }]), async (req, res) => {
     try {
-        const { nama, jabatan, keterangan } = req.body;
+        const { nama, jabatan, keterangan, sejarah } = req.body; // Menambah inputan untuk sejarah
         if (req.files['profile'] && req.files['profile'][0]) {
             const newProfile = new Profile({
-                nama, jabatan, keterangan, profile: req.files['profile'][0].filename
+                nama, jabatan, keterangan, sejarah, profile: req.files['profile'][0].filename // Menambah sejarah ke data yang disimpan
             });
             const saveProfile = await newProfile.save();
             res.status(200).json({ profile: saveProfile, message: 'Profile telah disimpan' });

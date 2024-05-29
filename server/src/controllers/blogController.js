@@ -22,12 +22,13 @@ const upload = multer({ storage: storage });
 
 route.post('/add-blog', upload.fields([{ name: 'gambar', maxCount: 1 }]), async (req, res) => {
     try {
-        const { judul, tanggal, penulis, narasi, narasi_2 } = req.body;
+        const { judul, tanggal, penulis, jenis, narasi, narasi_2 } = req.body;
         if (req.files['gambar'] && req.files['gambar'][0]) {
             const newBlog = new Blog({
                 judul,
                 tanggal,
                 penulis,
+                jenis,
                 narasi,
                 narasi_2,
                 gambar: req.files['gambar'][0].filename
@@ -103,7 +104,7 @@ route.post('/edit-blog/:id', upload.fields([{ name: 'gambar', maxCount: 1 }]), a
         }
 
         // Ambil data yang ingin diubah dari body request
-        const { judul, tanggal, penulis, narasi, narasi_2 } = req.body;
+        const { judul, tanggal, jenis, penulis, narasi, narasi_2 } = req.body;
 
         // Jika ada gambar yang diunggah, update nama gambar dan hapus gambar lama
         if (req.files['gambar'] && req.files['gambar'][0]) {
@@ -117,6 +118,7 @@ route.post('/edit-blog/:id', upload.fields([{ name: 'gambar', maxCount: 1 }]), a
 
         // Update data blog
         blog.judul = judul;
+        blog.jenis = jenis;
         blog.tanggal = tanggal;
         blog.penulis = penulis;
         blog.narasi = narasi;

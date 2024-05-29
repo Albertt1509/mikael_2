@@ -26,7 +26,10 @@ const ProfileDetail = () => {
                     </div>
                     <div className="w-full md:w-1/2 p-4">
                         <h1 className="font-semibold text-center md:text-left text-4xl mb-2">Profile Gereja</h1>
-                        <p className="font-light text-sm text-center md:text-left mb-2">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ullam adipisci facilis et, qui ipsa nihil quos repellat.</p>
+                        {profiles.map((profile) => (
+                            <p key={profile._id} className="font-light text-sm text-center md:text-left mb-2">{profile.sejarah}</p>
+                        ))}
+
                     </div>
                 </div>
             </div>

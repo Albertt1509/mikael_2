@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ function BlogList() {
     const [blog, setBlog] = useState(null);
     const [judul, setJudul] = useState('');
     const [tanggal, setTanggal] = useState('');
+    const [jenis, setJenis] = useState('');
     const [penulis, setPenulis] = useState('');
     const [narasi, setNarasi] = useState('');
     const [narasi2, setNarasi2] = useState('');
@@ -21,6 +22,7 @@ function BlogList() {
                 setBlog(data);
                 setJudul(data.judul);
                 setTanggal(data.tanggal);
+                setTanggal(data.jenis);
                 setPenulis(data.penulis);
                 setNarasi(data.narasi);
                 setNarasi2(data.narasi_2);
@@ -36,6 +38,9 @@ function BlogList() {
 
     const handleTanggalChange = (e) => {
         setTanggal(e.target.value);
+    };
+    const handleJenisChange = (e) => {
+        setJenis(e.target.value);
     };
 
     const handlePenulisChange = (e) => {
@@ -69,6 +74,7 @@ function BlogList() {
             const formData = new FormData();
             formData.append('judul', judul);
             formData.append('tanggal', tanggal);
+            formData.append('jenis', jenis);
             formData.append('penulis', penulis);
             formData.append('narasi', narasi);
             formData.append('narasi_2', narasi2);
@@ -123,6 +129,24 @@ function BlogList() {
                             <div className="w-full md:w-1/2 md:pl-2">
                                 <label htmlFor="gambar" className="block text-gray-700 font-bold mb-2">Gambar:</label>
                                 <input type="file" id="gambar" onChange={handleGambarChange} className="w-full p-2 border rounded" />
+                            </div>
+                        </div>
+                        <div className="flex flex-wrap mb-4">
+                            <div className="w-full md:w-1/2 md:pr-2">
+                                <label htmlFor="jenis" className="block text-gray-700 font-bold mb-2">Jenis Blog:</label>
+                                <select id="jenis" value={jenis} onChange={handleJenisChange} className="p-3 block w-full mt-1 border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                    <option value="" disabled>Pilih Jenis Blog</option>
+                                    <option value="dewanParoki">Dewan Paroki</option>
+                                    <option value="liturgi">Liturgi</option>
+                                    <option value="pewartaan">Pewartaan</option>
+                                    <option value="pelayananKemasyarakatan">Pelayanan Kemasyarakatan</option>
+                                    <option value="paguyuban">Paguyuban</option>
+                                    <option value="kategorial">Kategorial</option>
+                                    <option value="rumahTangga">Rumah Tangga</option>
+                                    <option value="penelitianDanPengembangan">Penelitian dan Pengembangan</option>
+                                    <option value="wilayah">Wilayah</option>
+                                    <option value="lainnya">Lainnya</option>
+                                </select>
                             </div>
                         </div>
                         <div className="mb-4">

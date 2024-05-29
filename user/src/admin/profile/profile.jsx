@@ -6,12 +6,13 @@ const ProfileContent = () => {
     const [jabatan, setJabatan] = useState('');
     const [keterangan, setKeterangan] = useState('');
     const [profile, setProfile] = useState('');
+    const [sejarah, setSejarah] = useState(''); // Menambah state untuk sejarah
     const [showSuccessNotification, setShowSuccessNotification] = useState(false);
     const [showErrorNotification, setShowErrorNotification] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!nama || !jabatan || !keterangan || !profile) {
+        if (!nama || !jabatan || !keterangan || !profile || !sejarah) { // Menambah validasi untuk sejarah
             setShowErrorNotification(true);
             setTimeout(() => {
                 setShowErrorNotification(false);
@@ -24,6 +25,7 @@ const ProfileContent = () => {
             formData.append('jabatan', jabatan);
             formData.append('keterangan', keterangan);
             formData.append('profile', profile);
+            formData.append('sejarah', sejarah); // Menambahkan sejarah ke FormData
 
             const response = await axios.post('/api/add-profile', formData, {
                 headers: {
@@ -40,6 +42,7 @@ const ProfileContent = () => {
             setJabatan('');
             setKeterangan('');
             setProfile('');
+            setSejarah(''); // Reset juga state untuk sejarah
         } catch (error) {
             console.log(error);
             setShowErrorNotification(true);
@@ -74,6 +77,12 @@ const ProfileContent = () => {
                                 <div className="w-full md:w-1/2 md:pl-2">
                                     <label htmlFor="profile" className="block text-gray-700 font-bold mb-2">Profile:</label>
                                     <input type="file" id="profile" name="profile" onChange={(e) => setProfile(e.target.files[0])} className="w-full p-2 border rounded" required />
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap mb-4">
+                                <div className="w-full">
+                                    <label htmlFor="sejarah" className="block text-gray-700 font-bold mb-2">Sejarah:</label>
+                                    <textarea id="sejarah" name="sejarah" placeholder="Masukkan sejarah" value={sejarah} onChange={(e) => setSejarah(e.target.value)} className="w-full p-2 border rounded" required />
                                 </div>
                             </div>
                             <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded">Submit</button>

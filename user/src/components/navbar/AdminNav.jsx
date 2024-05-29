@@ -15,6 +15,9 @@ import PengumumanEdit from '../../admin/pengumuman/editPengumuman';
 import Blog from '../../admin/blog/blog';
 import BlogShow from '../../admin/blog/blogShow';
 import BlogEdit from '../../admin/blog/blogEdit';
+import MediaAdd from '../../admin/media/mediaAdd';
+import MediaEdit from '../../admin/media/mediaEdit';
+import MediaShow from '../../admin/media/mediaShow';
 import { useParams } from 'react-router-dom';
 
 const Content = () => {
@@ -69,6 +72,15 @@ const Content = () => {
             )}
             {location.pathname === `/dashboard/blog-edit/${id}` && (
                 <BlogEdit />
+            )}
+            {location.pathname === `/dashboard/media-add` && (
+                <MediaAdd />
+            )}
+            {location.pathname === `/dashboard/media-show` && (
+                <MediaShow />
+            )}
+            {location.pathname === `/dashboard/media-edit/${id}` && (
+                <MediaEdit />
             )}
 
         </div>

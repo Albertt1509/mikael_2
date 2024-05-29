@@ -13,8 +13,10 @@ const profileSchema = new Schema({
     },
     profile: {
         type: String
+    },
+    sejarah: {
+        type: String
     }
-
 })
 const profileModel = mongoose.model('profile', profileSchema)
 module.exports = profileModel

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Layout from './components/navbar/Layout';
 import HomePage from './user/homepage/Homepage';
 import Profile from './user/profile/Profile';
+import Media from './user/media/media';
 import ProfileDetail from './user/profile/ProfileDetail';
 import Blog from './user/blog/Blog';
 import DetailBlog from './user/blog/DetailBlog';
@@ -27,6 +28,9 @@ import AdminPengumumanShow from './admin/pengumuman/pengumumanShow'
 import AdminBlog from './admin/blog/blog'
 import AdminBlogShow from './admin/blog/blogShow'
 import AdminBlogEdit from './admin/blog/blogEdit'
+import AdminMediaAdd from './admin/media/mediaAdd';
+import AdminMediaEdit from './admin/media/mediaEdit';
+import AdminMediaShow from './admin/media/mediaShow';
 
 // Koneksi API
 axios.defaults.baseURL = 'http://localhost:4000';
@@ -40,6 +44,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/media' element={<Media />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/profile/:id' element={<ProfileDetail />} />
           <Route path='/blog' element={<Blog />} />
@@ -65,6 +70,9 @@ function App() {
             <Route path='/dashboard/blog-add' element={<AdminBlog />} />
             <Route path='/dashboard/blog-show' element={<AdminBlogShow />} />
             <Route path='/dashboard/blog-edit/:id' element={<AdminBlogEdit />} />
+            <Route path='/dashboard/media-show' element={<AdminMediaShow />} />
+            <Route path='/dashboard/media-add' element={<AdminMediaAdd />} />
+            <Route path='/dashboard/media-edit/:id' element={<AdminMediaEdit />} />
           </Route>
         </Route >
       </Routes >

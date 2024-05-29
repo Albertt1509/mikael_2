@@ -114,8 +114,6 @@ route.post('/edit-pengumuman/:id', upload.single('thumbnail'), async (req, res) 
     }
 });
 
-
-
 route.delete('/delete-pengumuman/:id', async (req, res) => {
     try {
         const pengumumanId = req.params.id

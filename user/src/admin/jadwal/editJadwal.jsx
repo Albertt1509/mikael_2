@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-
 const EditJadwal = () => {
     const { id } = useParams();
     const [misa, setMisa] = useState('');
@@ -14,9 +13,9 @@ const EditJadwal = () => {
         axios.get(`api/get-jadwal/${id}`)
             .then(response => {
                 const data = response.data;
-                setMisa(data.misa); // Set value misa from response data
-                setHari(data.hari); // Set value hari from response data
-                setJam(data.jam); // Set value jam from response data
+                setMisa(data.misa);
+                setHari(data.hari);
+                setJam(data.jam);
             })
             .catch(error => {
                 console.error('error get data jadwal', error);

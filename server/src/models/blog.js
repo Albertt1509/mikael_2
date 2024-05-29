@@ -14,6 +14,21 @@ const blogSchema = new Schema({
     gambar: {
         type: String,
     },
+    jenis: {
+        type: String,
+        enum: [
+            'dewanParoki',
+            'liturgi',
+            'pewartaan',
+            'pelayananKemasyarakatan',
+            'paguyuban',
+            'kategorial',
+            'rumahTangga',
+            'penelitianDanPengembangan',
+            'wilayah',
+            'lainnya'
+        ]
+    },
     narasi: {
         type: String,
         require: true
